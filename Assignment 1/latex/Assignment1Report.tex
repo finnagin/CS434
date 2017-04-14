@@ -7,8 +7,7 @@
 
 \begin{document}
 	\maketitle
-	\section{Appended 1s column}
-	\subsection{Computing W}
+	\section*{Parts 1 \& 2: Loading Data and Solving for W}
 After loading the data into X matrices and Y vectors we appended a column of ones to Xs and calculated W in the following way:
 	$$
 	W = (X_{train}^{T}X_{train})^{-1}X_{train}^{T}Y_{train}
@@ -34,7 +33,7 @@ After loading the data into X matrices and Y vectors we appended a column of one
 		\end{bmatrix}
 	\end{align}
 	
-	\subsection{Computing SSE}
+	\section*{Part 3: Calculating SSEs}
 	
 We then calculated the SSE for the training and testing data resulting in the following values:
 	\begin{align}
@@ -42,7 +41,7 @@ We then calculated the SSE for the training and testing data resulting in the fo
 		SSE_{testing} &= 1675.231
 	\end{align}
 
-	\section{No extra column}
+	\section*{Part 4: Removing Column of Ones}
 What happens when we don't append an extra column of 1s? Well for starters we generate a different W that is noticeably 1 row shorter:
 	
 	\begin{align}
@@ -72,7 +71,7 @@ What happens when we don't append an extra column of 1s? Well for starters we ge
 	
 Notice that both of the SSEs are larger if we don't add the extra column. This makes sense because without an extra column to estimate the constant in our linear model we are essentially assuming that our models goes through the origin resulting in a much less flexible model.
 	
-	\section{Random Features}
+	\section*{Part 5: Random Features}
 	
 To examine the effect of randomly generated features on our model we generated a randomly ordered vector containing the elements of the set:
 	
@@ -85,7 +84,7 @@ We then created 12 different testing and training data sets by adding 1-12 rando
 	
 	\begin{figure}[h!]
 		\begin{center} 
-			\includegraphics[scale=0.45]{random_figure.eps} 
+			\includegraphics[scale=0.5]{random_figure.eps} 
 		\end{center} 
 		\label{fig:M1}
 	\end{figure}
@@ -94,7 +93,7 @@ For the training data as we add more random features the SSE gets smaller. This 
 	
 	\newpage
 	
-	\section{Regularization}
+	\section*{Part 6: Regularization}
 	
 We then returned to the original data set and calculated new Ws using the following formula:
 	
@@ -112,25 +111,31 @@ We then calculated the SSEs for the testing and training data sets and plotted t
 	
 	\begin{figure}[h!]
 		\begin{center} 
-			\includegraphics[scale=0.45]{lambda_figure.eps} 
+			\includegraphics[scale=0.5]{lambda_figure.eps} 
 		\end{center}  
 		\label{fig:M2}
 	\end{figure}
 
 As we can see the SSEs for the training data gets larger as $\lambda$ get larger. This makes sense because as lambda increases the model under-fits our training data more and more. As we can see from the testing SSEs this starts out decreasing as lambda increases but after it peaks around $\lambda = i^{i}$ the SSEs start to increase. Thuus, from the values of $\lambda$ that we tried $i^i$ minimizes the testing SSE. \\ 
-	
-Also, as $\lambda$ increases we can see that the magnitude of the weights in W seem to be getting smaller overall. We can see this trend by plotting $\lambda$ and $\Vert W \Vert$:
+
+\section*{Part 7: Regularization's Effect on W}
+
+Also, as $\lambda$ increases we can see that the of the weights in W seem to be getting smaller overall. We can see this trend by plotting $\lambda$ and $\Vert W \Vert_{2}$:
 
 	
 	\begin{figure}[h!]
 		\begin{center} 
-			\includegraphics[scale=0.45]{lambda_norm.eps} 
+			\includegraphics[scale=0.5]{lambda_norm.eps} 
 		\end{center}  
 		\label{fig:M3}
 	\end{figure}
 \newpage
 
-We see a downward trend of $\Vert W \Vert$ as lambda decreases. This behavior makes sense when we consider that minimizing the equation: 
+We see a downward trend of $\Vert W \Vert_{2}$ as lambda decreases. 
+
+\section*{Part 8: Explaining the Effect of Regularization}
+
+This behavior talked about in the last section makes sense when we consider that minimizing the equation: 
 
 $$
 \sum_{i = 1}^{n} (y_{i}-W^{T} x_{i})^{2} + \lambda \Vert W \Vert_{2}^{2}
@@ -142,10 +147,10 @@ $$
 W = (X^{T}X + \lambda I)^{-1}X^{T}Y
 $$
 
-As we can see in the former equation as $\lambda$ increases the minimization process is weighted more towards minimizing $\Vert W \Vert_{2}^{2}$ than $\sum_{i = 1}^{n} (y_{i}-W^{T} x_{i})^{2} = SSE$. Thus, as $\lambda$ increases $\Vert W \Vert_{2}^{2}$ will decrease which in turn decreases $\Vert W \Vert$. This is of course the pattern we saw in the above graph.
+As we can see in the former equation as $\lambda$ increases the minimization process is weighted more towards minimizing $\Vert W \Vert_{2}^{2}$ than $\sum_{i = 1}^{n} (y_{i}-W^{T} x_{i})^{2} = SSE$. Thus, as $\lambda$ increases $\Vert W \Vert_{2}^{2}$ will decrease which in turn decreases $\Vert W \Vert_{2}$. This is of course the pattern we saw in the above graph.
 	
 	
-	\bibliography{myCitations} 
-	\bibliographystyle{abbrv}
+	%\bibliography{myCitations} 
+	%\bibliographystyle{abbrv}
 	
 \end{document} 
