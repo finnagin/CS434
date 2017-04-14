@@ -1,4 +1,5 @@
 clc; close all; clear all; 
+format long g
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Trdata = load('housing_train.txt'); % load training data
@@ -43,7 +44,8 @@ l = length(lambda); % obtain the of number of regularization constants
 ltr_error = zeros(l, 1); 
 lte_error = zeros(l, 1);
 
-ltrw_norm = [];
+ltrw_norm = []; 
+
 for k = 1:l
     [ltr_error(k), lte_error(k), ltr_w] = sse(Xtr, Ytr, Xte, Yte, lambda(k));
     ltrw_norm = [ltrw_norm, ltr_w'*ltr_w];
@@ -51,11 +53,15 @@ end
 
 figure
 subplot(2, 1, 1);
-plot(lambda, ltr_error, 'ro');
+plot(lambda, ltr_error, 'ro-');
 title('SSE with Regularization For Training Data');
+ylabel('SSE')
+xlabel('Lambda')
 subplot(2, 1, 2);
-plot(lambda, lte_error, 'bo');
+plot(lambda, lte_error, 'bo-');
 title('SSE with Regularization For Testing Data');
+ylabel('SSE')
+xlabel('Lambda')
 hold off
 
 % When we increase lambda, the sum of square error will get larger
@@ -81,14 +87,17 @@ w_norm = [];
 % different lambda
 lfe_error = [];
 
-rfeatures = [1 5 4 12 6 10 2 3 9 8 11 7 10]; % random features
+% Seed the random functions
+rng(1123581321)
+
+% uniform random features distribute on [0,a]
+rfeatures = randperm(12); 
 
 for f = rfeatures
-    % uniform features distribute on [0,a]
     
     % add uniform features 
-    Xfr = [(f+1)*rand(mtr, 1) f*rand(mtr, 1) Xfr];
-    Xfe = [(f+1)*rand(mte, 1) f*rand(mte, 1) Xfe];
+    Xfr = [(f+12)*rand(mtr, 1) f*rand(mtr, 1) Xfr];
+    Xfe = [(f+12)*rand(mte, 1) f*rand(mte, 1) Xfe];
     
     [r_error, e_error, wfr] = sse(Xfr, Ytr, Xfe, Yte, 0);
     w_norm = [w_norm, wfr'*wfr];
@@ -111,11 +120,15 @@ end
 
 figure
 subplot(2, 1, 1);
-plot(fr_error, 'ro');
+plot(2*(1:12), fr_error, 'ro-');
 title('SSE with Additional Random Features For Training Data');
 subplot(2, 1, 2);
-plot(fe_error, 'bo')
+ylabel('SSE')
+xlabel('Additional Features')
+plot(2*(1:12), fe_error, 'bo-')
 title('SSE with Additional Random Features For Testing Data');
+ylabel('SSE')
+xlabel('Additional Features')
 hold off
 
 % The model(linear regression with order 1) we have is 
@@ -132,14 +145,13 @@ hold off
 % will increase when we keep adding features.
 
 %% Addition Test For Problem Seven
-% compute the mean of sum of square error of training data
-mfr_error = zeros(13, 1); 
-% compute the mean of sum of square error of testing data
-mfe_error = zeros(13, 1); 
-
 fel = length(rfeatures); % obtain the number of features
+% compute the mean of sum of square error of training data
+mfr_error = zeros(fel, 1); 
+% compute the mean of sum of square error of testing data
+mfe_error = zeros(fel, 1); 
 
-for n = 1:fel
+for n = 1:100
     [mfr_er, mfe_er, mwftr] = fsse(Xtr, Ytr, Xte, Yte, rfeatures, 0);
     mfr_error = mfr_error + mfr_er;
     mfe_error = mfe_error + mfe_er;
@@ -152,10 +164,14 @@ result2 = mfe_error*(1/fel);
 
 figure
 subplot(2, 1, 1);
-plot(result1, 'ro');
+plot(2*(1:12),result1, 'ro-');
 title('Mean SSE with Additional Random Features For Training Data');
+ylabel('Mean SSE')
+xlabel('Additional Features')
 subplot(2, 1, 2);
-plot(result2, 'bo')
+plot(2*(1:12),result2, 'bo-')
+ylabel('Mean SSE')
+xlabel('Additional Features')
 title('Mean SSE with Additional Random Features For Testing Data');
 hold off
 
@@ -170,11 +186,15 @@ te_er = ones(reg_m, 1)*fe_error' + reg;
 
 figure
 subplot(2, 1, 1)
-plot(tr_er(1,:), 'ro');
+plot(2*(1:12),tr_er(1,:), 'ro-');
 title(['SSE With Regularization Term When \lambda = ', num2str(lambda(1))])
 subplot(2, 1, 2)
-plot(te_er(1,:), 'bo');
+ylabel('SSE')
+xlabel('Additional Features')
+plot(2*(1:12),te_er(1,:), 'bo-');
 title(['SSE With Regularization Term When \lambda = ', num2str(lambda(1))])
+ylabel('SSE')
+xlabel('Additional Features')
 hold off
 
 % Yes, we can. From the resulting graph, we obtain two similar graphs with
@@ -182,6 +202,17 @@ hold off
 % $w = (X^TX + \lambda I)^{-1}X^TY$.
 
 figure
-plot(lambda, ltrw_norm, 'o');
-title(['||w|| With \lambda '])
+plot(lambda, sqrt(ltrw_norm), 'mo-');
+title('||w||_{2} With Regularization ')
+ylabel('||w||_{2}')
+xlabel('Lambda')
 hold off
+
+% $\sum_{i=1}^n(y_i - w^TX)^2 + \lambda\Vert w\Vert_2^2$
+%
+% Since we are minimaizing the optimal weight vector, w,
+% if we keep increasing regularization constant, values of
+% w will decrease because we are spreading weight to each
+% features. i.e. Some features will have lower weight; some features will
+% have lower weight. Thus, the magnitude of w will decrease as lambda
+% increase. 

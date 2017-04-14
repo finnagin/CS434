@@ -11,8 +11,8 @@ wftr =[]; % obtain the optimal weight
 
 for f = features
     % add uniform features 
-    Xfr = [(f+1)*rand(mtr, 1) f*rand(mtr, 1) Xfr];
-    Xfe = [(f+1)*rand(mte, 1) f*rand(mte, 1) Xfe];
+    Xfr = [(f+12)*rand(mtr, 1) f*rand(mtr, 1) Xfr];
+    Xfe = [(f+12)*rand(mte, 1) f*rand(mte, 1) Xfe];
     
     [r_error, e_error, wfr] = sse(Xfr, Ytr, Xfe, Yte, lambda);
     wftr = [wftr, {wfr}];
