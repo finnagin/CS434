@@ -60,9 +60,13 @@ figure
 subplot(2, 1, 1);
 plot(SSEavg(1,:), 'ro-');
 title('Mean SSE with Additional Random Features For Training Data');
+xlabel('Number of Additional Random Features')
+ylabel('Mean SSE')
 subplot(2, 1, 2);
 plot(SSEavg(2,:), 'bo-')
 title('Mean SSE with Additional Random Features For Testing Data');
+xlabel('Number of Additional Random Features')
+ylabel('Mean SSE')
 hold off
 
 %% Problem 6
@@ -83,9 +87,13 @@ figure
 subplot(2, 1, 1);
 plot(Lambdas, LambdaTrain, 'ro-');
 title('SSE with Regularization For Training Data');
+xlabel('Lambda')
+ylabel('SSE')
 subplot(2, 1, 2);
 plot(Lambdas, LambdaTest, 'bo-');
 title('SSE with Regularization For Testing Data');
+xlabel('Lambda')
+ylabel('SSE')
 hold off
 
 %% Problem 7
@@ -96,9 +104,17 @@ for k = 1:size(Lambdas,2)
     WNorms(k) = norm(Wlambda(:,k));
 end
 
+sqrt(Wlambda(:,1)'*Wlambda(:,1))
+
 figure
 plot(Lambdas, WNorms, 'mo-');
-title('W Norms with Regularization For Training Data');
+title('||W||_{2} with Regularization For Training Data');
+xlabel('Lambda')
+ylabel('||W||_{2}')
 hold off
+
+%% Problem 8
+
+
 
 %% Display 
