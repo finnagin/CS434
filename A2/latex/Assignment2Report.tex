@@ -84,8 +84,8 @@ Repeat until convergence: \\
 \tab For i = 1 to N do \\
 \tab \tab $\hat{y}_{i} \leftarrow \frac{1}{1 + e^{-w \cdot x_{i}}}$ \\
 \tab \tab $error = y_{i} - \hat{y}_{i}$ \\
-\tab \tab $d = d + error \cdot (x_{i} + 2 w)$ \\
-\tab $w \leftarrow w + \eta d$
+\tab \tab $d = d + error \cdot x_{i}$ \\
+\tab $w \leftarrow w + \eta \cdot (d + 2 w)$
 		
 
 
