@@ -7,8 +7,6 @@ clear all;
 
 format long g
 
-rng(112358)
-
 %% Loading data
 
 Train = load('usps-4-9-train.csv'); % load training data
@@ -24,65 +22,68 @@ Xtest = Test(:, 1:(end-1));
 Ytest = Test(:, end);
 
 %% Problem 1
-learnRates = arrayfun(@(x) (x*10)^-8, .5:.5:4);
-N = 50;
-BatSize = 200;
-norms = zeros(1,size(learnRates,2));
-losses = norms;
+%learnRates = arrayfun(@(x) (10)^-x, 6:9);
+learnRates = [2e-6 1e-6 3e-7 2e-7 1e-7];
+N = 1500;
+losses = zeros(size(learnRates,2),N);
 
+figure
+hold on
 for k = 1:size(learnRates,2)
     learn = learnRates(k);
-    W = gradBatch(Xtrain, Ytrain, N, learn, BatSize, 0);
-    norms(k) = sqrt(W*W');
-    losses(k) = -Ytrain'*log(1./(1+exp(-W*Xtrain')))' - (1 - Ytrain')*log(1 - 1./(1+exp(-W*Xtrain')))';
+    losses(k,:) = gradBatch(Xtrain, Ytrain, N, learn, 0, 1);
+    plot(1:N, losses(k,:), '-')
 end
 
-plot(.5:.5:4,losses, 'o-')
+ylim([0 50])
+legend(strread(num2str(learnRates),'%s'))
+hold off
 
 %% Problem 2
 
-learner = 10^-8;
-iterations = [10 50 100 200 300 400 500];
-losses = zeros(1,size(iterations,2));
-
-ATrain = zeros(size(iterations,2), 1);
+learner = 1e-7;
+%iterations =[1 2:2:1500];
+N = 1500;
+ATrain = zeros(N, 1);
 ATest = ATrain;
 
+W = gradVec(Xtrain, Ytrain, 1500, learner, 0);
 
-for k = 1:size(iterations,2)
-    W = gradBatch(Xtrain, Ytrain, iterations(k), learner, BatSize, 0);
+for k = 1:N
+    %W = gradBatch(Xtrain, Ytrain, iterations(k), learner, 0);
     
     % Compute training accuracy
-    Pred = (1./(1+exp(-W*Xtrain')) >= 1/2); % Prediction on training data
+    Pred = (1./(1+exp(-W(k,:)*Xtrain')) >= 1/2); % Prediction on training data
     error = sum(abs(Ytrain - Pred'));
     ATrain(k) = 1 - error/size(Xtrain,2);
 
     % Compute testing accuracy
-    Pred = (1./(1+exp(-W*Xtest')) >= 1/2); % Prediction on testing data
+    Pred = (1./(1+exp(-W(k,:)*Xtest')) >= 1/2); % Prediction on testing data
     error = sum(abs(Ytest - Pred'));
     ATest(k) = 1 - error/size(Xtest,2);
     
 end
 
 figure
-plot(iterations, ATrain, 'ro-', iterations, ATest, 'bo-')
+plot(1:1500, ATrain, 'r-', 1:1500, ATest, 'b-')
 xlabel('Iterations')
 ylabel('Accuracy')
 legend('Training Accuracy', 'Testing Accuracy')
+ylim([.9 1])
 hold off
 
 %% Problem 3
 
 %% Problem 4
 
-lambdas = arrayfun(@(x) 10^-x, -3:3);
+lambdas = arrayfun(@(x) 10^x, -6:2:6);
 
 
 ATrain = zeros(size(lambdas,2), 1);
 ATest = ATrain;
 
 for k = 1:size(lambdas,2)
-    W = gradBatch(Xtrain, Ytrain, N, learner, BatSize, lambdas(k));
+    W = gradBatch(Xtrain, Ytrain, 175, learner, lambdas(k));
     
     
     Pred = (1./(1+exp(-W*Xtrain')) >= 1/2); 
@@ -96,8 +97,8 @@ for k = 1:size(lambdas,2)
 end
 
 figure
-plot(lambdas, ATrain, 'ro-', lambdas, ATest, 'bo-')
-xlabel('Lambda')
+plot(-6:2:6, ATrain, 'ro-', -6:2:6, ATest, 'bo-')
+xlabel('Lambda (10^x)')
 ylabel('Accuracy')
 legend('Training Accuracy', 'Testing Accuracy')
 hold off
