@@ -20,7 +20,7 @@ function W = gradBatch(X, Y, N, learn, Lam, loss)
                               % is inputted for loss
         loss = 0; 
     elseif (loss ~= 1 && loss ~= 0) % this sets the loss to zero if a number
-                                    % besides 0 or 1 is inputted for oss
+                                    % besides 0 or 1 is inputted for loss
         loss = 0;
         disp('Warning: setting loss flag to 0.') % displays a warning to 
                                                  % indicate that the loss 
