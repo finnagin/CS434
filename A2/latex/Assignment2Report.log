@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.12.7)  21 APR 2017 02:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.12.7)  21 APR 2017 20:56
 entering extended mode
 **./Assignment2Report.tex
 (Assignment2Report.tex
@@ -250,104 +250,151 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
 Package epstopdf Info: Source file: <learn_rates.eps>
-(epstopdf)                    date: 2017-04-21 01:09:34
-(epstopdf)                    size: 142061 bytes
+(epstopdf)                    date: 2017-04-21 20:23:51
+(epstopdf)                    size: 141585 bytes
 (epstopdf)             Output file: <learn_rates-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-04-21 01:15:18
-(epstopdf)                    size: 42260 bytes
+(epstopdf)                    date: 2017-04-21 20:27:31
+(epstopdf)                    size: 42592 bytes
 (epstopdf)             Command: <epstopdf --outfile=learn_rates-eps-converted-t
 o.pdf learn_rates.eps>
 (epstopdf)             \includegraphics on input line 31.
 Package epstopdf Info: Output file is already uptodate.
 
-<learn_rates-eps-converted-to.pdf, id=14, 905.3825pt x 746.79pt>
+<learn_rates-eps-converted-to.pdf, id=14, 854.19125pt x 767.86874pt>
 File: learn_rates-eps-converted-to.pdf Graphic file (type pdf)
 
 <use learn_rates-eps-converted-to.pdf>
 Package pdftex.def Info: learn_rates-eps-converted-to.pdf used on input line 31
 .
-(pdftex.def)             Requested size: 452.69014pt x 373.39407pt.
+(pdftex.def)             Requested size: 341.67046pt x 307.14206pt.
+ [2 <./learn_rates-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <learn_rates_jitter.eps>
+(epstopdf)                    date: 2017-04-21 20:25:38
+(epstopdf)                    size: 190313 bytes
+(epstopdf)             Output file: <learn_rates_jitter-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-04-21 20:27:31
+(epstopdf)                    size: 48916 bytes
+(epstopdf)             Command: <epstopdf --outfile=learn_rates_jitter-eps-conv
+erted-to.pdf learn_rates_jitter.eps>
+(epstopdf)             \includegraphics on input line 42.
+Package epstopdf Info: Output file is already uptodate.
+<learn_rates_jitter-eps-converted-to.pdf, id=21, 851.18pt x 766.865pt>
+File: learn_rates_jitter-eps-converted-to.pdf Graphic file (type pdf)
 
-Overfull \hbox (107.69014pt too wide) in paragraph at lines 31--32
- [] 
- []
-
-[2 <./learn_rates-eps-converted-to.pdf>]
+<use learn_rates_jitter-eps-converted-to.pdf>
+Package pdftex.def Info: learn_rates_jitter-eps-converted-to.pdf used on input 
+line 42.
+(pdftex.def)             Requested size: 340.46596pt x 306.74057pt.
+ [3 <./learn_rates_jitter-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <iter_accuracy.eps>
-(epstopdf)                    date: 2017-04-21 01:09:21
-(epstopdf)                    size: 63694 bytes
+(epstopdf)                    date: 2017-04-21 20:26:04
+(epstopdf)                    size: 63560 bytes
 (epstopdf)             Output file: <iter_accuracy-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-04-21 01:15:18
-(epstopdf)                    size: 4057 bytes
+(epstopdf)                    date: 2017-04-21 20:27:32
+(epstopdf)                    size: 4497 bytes
 (epstopdf)             Command: <epstopdf --outfile=iter_accuracy-eps-converted
 -to.pdf iter_accuracy.eps>
-(epstopdf)             \includegraphics on input line 45.
+(epstopdf)             \includegraphics on input line 56.
 Package epstopdf Info: Output file is already uptodate.
 
-<iter_accuracy-eps-converted-to.pdf, id=21, 907.39pt x 745.78625pt>
+<iter_accuracy-eps-converted-to.pdf, id=28, 848.16875pt x 766.865pt>
 File: iter_accuracy-eps-converted-to.pdf Graphic file (type pdf)
 
 <use iter_accuracy-eps-converted-to.pdf>
 Package pdftex.def Info: iter_accuracy-eps-converted-to.pdf used on input line 
-45.
-(pdftex.def)             Requested size: 453.6939pt x 372.89221pt.
+56.
+(pdftex.def)             Requested size: 339.26149pt x 306.74057pt.
+ [4 <./iter_accuracy-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <iter_accuracy2.eps>
+(epstopdf)                    date: 2017-04-21 20:26:20
+(epstopdf)                    size: 63976 bytes
+(epstopdf)             Output file: <iter_accuracy2-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-04-21 20:27:32
+(epstopdf)                    size: 4215 bytes
+(epstopdf)             Command: <epstopdf --outfile=iter_accuracy2-eps-converte
+d-to.pdf iter_accuracy2.eps>
+(epstopdf)             \includegraphics on input line 67.
+Package epstopdf Info: Output file is already uptodate.
+ <iter_accuracy2-eps-converted-to.pdf, id=35, 846.16125pt x 765.86125pt>
+File: iter_accuracy2-eps-converted-to.pdf Graphic file (type pdf)
 
-Overfull \hbox (108.6939pt too wide) in paragraph at lines 45--46
+<use iter_accuracy2-eps-converted-to.pdf>
+Package pdftex.def Info: iter_accuracy2-eps-converted-to.pdf used on input line
+ 67.
+(pdftex.def)             Requested size: 338.45851pt x 306.33907pt.
+ [5 <./iter_accuracy2-eps-converted-to.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 100--111
+
+ []
+
+[6]
+Package epstopdf Info: Source file: <lambda_accuracy_out.eps>
+(epstopdf)                    date: 2017-04-21 20:26:43
+(epstopdf)                    size: 26386 bytes
+(epstopdf)             Output file: <lambda_accuracy_out-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-04-21 20:27:32
+(epstopdf)                    size: 6029 bytes
+(epstopdf)             Command: <epstopdf --outfile=lambda_accuracy_out-eps-con
+verted-to.pdf lambda_accuracy_out.eps>
+(epstopdf)             \includegraphics on input line 129.
+Package epstopdf Info: Output file is already uptodate.
+ <lambda_accuracy_out-eps-converted-to.pdf, id=50, 847.165pt x 763.85374pt>
+File: lambda_accuracy_out-eps-converted-to.pdf Graphic file (type pdf)
+
+<use lambda_accuracy_out-eps-converted-to.pdf>
+Package pdftex.def Info: lambda_accuracy_out-eps-converted-to.pdf used on input
+ line 129.
+(pdftex.def)             Requested size: 423.58145pt x 381.92593pt.
+
+Overfull \hbox (78.58145pt too wide) in paragraph at lines 129--130
  [] 
  []
 
-[3 <./iter_accuracy-eps-converted-to.pdf>]
+[7 <./lambda_accuracy_out-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <lambda_accuracy.eps>
-(epstopdf)                    date: 2017-04-21 01:09:01
-(epstopdf)                    size: 21252 bytes
+(epstopdf)                    date: 2017-04-21 20:27:01
+(epstopdf)                    size: 22202 bytes
 (epstopdf)             Output file: <lambda_accuracy-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-04-21 01:15:19
-(epstopdf)                    size: 4408 bytes
+(epstopdf)                    date: 2017-04-21 20:27:33
+(epstopdf)                    size: 4658 bytes
 (epstopdf)             Command: <epstopdf --outfile=lambda_accuracy-eps-convert
 ed-to.pdf lambda_accuracy.eps>
-(epstopdf)             \includegraphics on input line 114.
+(epstopdf)             \includegraphics on input line 156.
 Package epstopdf Info: Output file is already uptodate.
 
-<lambda_accuracy-eps-converted-to.pdf, id=29, 905.3825pt x 742.775pt>
+<lambda_accuracy-eps-converted-to.pdf, id=58, 846.16125pt x 763.85374pt>
 File: lambda_accuracy-eps-converted-to.pdf Graphic file (type pdf)
 
 <use lambda_accuracy-eps-converted-to.pdf>
 Package pdftex.def Info: lambda_accuracy-eps-converted-to.pdf used on input lin
-e 114.
-(pdftex.def)             Requested size: 452.69014pt x 371.38658pt.
-
-Overfull \hbox (107.69014pt too wide) in paragraph at lines 114--115
- [] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4] [5 <./lambda_accuracy-eps-converted-to.pdf>] (Assignment2Report.aux) ) 
+e 156.
+(pdftex.def)             Requested size: 338.45851pt x 305.53607pt.
+ [8 <./lambda_accuracy-eps-converted-to.pdf>] (Assignment2Report.aux) ) 
 Here is how much of TeX's memory you used:
- 3728 strings out of 493333
- 50781 string characters out of 3139173
- 117486 words of memory out of 3000000
- 7210 multiletter control sequences out of 15000+200000
+ 3746 strings out of 493333
+ 51381 string characters out of 3139173
+ 116507 words of memory out of 3000000
+ 7225 multiletter control sequences out of 15000+200000
  10888 words of font info for 43 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,15n,32p,260b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Assignment2Report.pdf (5 pages, 186867 bytes).
+ 40i,15n,32p,446b,258s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/symbols/msbm10.pfb>
+Output written on Assignment2Report.pdf (8 pages, 249384 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
+ 109 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
