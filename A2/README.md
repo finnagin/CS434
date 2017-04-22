@@ -11,7 +11,7 @@
    usps-4-9-train.csv
 ```
 
-2. Next, open `assignment_one.m` in matlab.
+2. Next, open `assignment_2.m` in matlab.
 
 3. Click the run button at the top.
 
