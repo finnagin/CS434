@@ -16,44 +16,28 @@ X_test = [ones(Test_samples, 1) Test_data(:, 1:256)];
 Y_test = Test_data(:, 257); 
 
 %% Problem One
-learning_rate = (7:0.001:7.18)*1e-8;
+learning_rate = [1e-7 2e-7 1e-6 2e-6];
 num_lr = length(learning_rate); % obtain the number of learning rate 
 
-% obtain the norm of each w and loss with different learning rate
-w_norm = zeros(length(learning_rate), 1); 
-loss = w_norm;
-
 % initial optimal weight
-initial_w = zeros(size(X_train, 2), 1);
-
-% initialize the first loss
-pre_loss = 0;
-
-for r = 1:num_lr
-    w = Batgrad(X_train, Y_train, 100, initial_w, learning_rate(r), 0);
-    w_norm(r) = sqrt(w'*w);
-    loss(r) = LossFunc(X_train, Y_train, w);
-    if abs(loss(r) - pre_loss) < 1e-3 
-        break
-    end
-    pre_loss = loss(r);
-end
+initial_w = zeros(Train_features, 1);
+% iterations
+iter = 800;
 
 figure
-plot(learning_rate, loss, 'o-');
-title('Batch Gradient Decent with Different Learning Rate')
-xlabel('Learning Rate')
-ylabel('Loss')
+hold on
+for n = 1:num_lr
+    loss = Batgrad(X_train, Y_train, iter, initial_w, learning_rate(n), 0, 1);
+    plot(1:iter, loss, '-')
+end
+ylim([0 50])
+legend(strread(num2str(learning_rate),'%s'))
 hold off
 
-% r = 7.16e-8 is our the desire learning rate. 
-% If we pick r greater than 7.16e-8, our prediction will always one; 
-% if we pick r somewhat less than 7.16e-8, 
-% our prediction will always or get close to zero. In each case, our loss 
-% will be not a number (NaN) or close to positive/negative infinity
+best_rate = 2e-6;
 
 %% Problem Two
-Iterations = [100 200 300 400 500];
+Iterations = [100 150 200 250 300 350 400 450 500];
 num_ite = length(Iterations);
 
 % store training accuracy and testing accuracy
@@ -61,7 +45,8 @@ train_accuracy = zeros(num_ite, 1);
 test_accuracy = train_accuracy;
 
 for i = 1:num_ite
-    train_w = Batgrad(X_train, Y_train, Iterations(i), initial_w, 7.16e-8, 0);
+    train_w = Batgrad(X_train, Y_train, Iterations(i),...
+        initial_w, best_rate, 0, 0);
     
     % Compute training accuracy
     train_pre = logclassify(sigmoid(X_train*train_w)); % Prediction on training data
@@ -87,11 +72,12 @@ hold off
 %% Problem Three
 %
 % If we differentiate the loss function respect to w, we have
-% $$\sum_{i=1}^m l(g(w^Tx^i,y^i))x^i+\lambda||w||_2$$
+% $$\sum_{i=1}^m l(g(w^Tx^i,y^i))x^i+\lambda*w$$
 %
 
 %% Problem Four
-Lambda = [10e-3 10e-2 10e-1 1 10e1 10e2 10e3];
+len = 1:0.5:7; % numbers of lambda
+Lambda = 10.^len;
 Num_lam = length(Lambda);
 
 % store training accuracy and testing accuracy with regularization term
@@ -99,7 +85,8 @@ re_train_accuracy = zeros(Num_lam, 1);
 re_test_accuracy = re_train_accuracy;
 
 for k = 1:Num_lam
-    re_train_w = Batgrad(X_train, Y_train, 200, initial_w, 7.16e-8, Lambda(k));
+    re_train_w = Batgrad(X_train, Y_train, 200, initial_w,...
+        best_rate, Lambda(k), 0);
     
     % Compute training accuracy
     re_train_pre = logclassify(sigmoid(X_train*re_train_w)); % Prediction on training data
@@ -113,12 +100,8 @@ for k = 1:Num_lam
 end
 
 figure
-plot(Lambda, re_train_accuracy, 'ro-', Lambda, re_test_accuracy, 'bo-')
+plot(len, re_train_accuracy, 'ro-', len, re_test_accuracy, 'bo-')
 xlabel('Lambda')
 ylabel('Accuracy')
 legend('Training Accuracy', 'Testing Accuracy')
 hold off
-
-% If we puted small enough regularization to the optimal weight, we would
-% obtain good accuracy; if too much regularization, the accuracy will drop
-% since we tend to predict one more than to predict zero.
