@@ -15,7 +15,7 @@ function branch = stump(X, Y)
                 
 %% code:
 
-info = zeros(1,size(X,2));
+info = [zeros(1,size(X,2));1:size(X,2)]';
 
 for n = 1:size(X,2)
     gain = 1.5;
@@ -30,9 +30,13 @@ for n = 1:size(X,2)
                         -(1-(c-1)/length(Y))*(p2*log2(p2)+(1-p2)*log2(1-p2))
             if gain_c < gain
                 gain = gain_c;
-                split = [n X_sorted(c,n)-X_sorted(c-1,n)];
+                split = [n (X_sorted(c,n)+X_sorted(c-1,n))/2];
             end
         end
     end
+    info(n,:) = split
+end
 
+info = sortrows(info,2)
+branch = info(1,:)
 end
