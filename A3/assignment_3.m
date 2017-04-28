@@ -71,3 +71,4 @@ hold off
 
 %% 2.1
 
+[a, b, c, d, e, f, g, h, j] = stump(X_Train,Y_Train);
