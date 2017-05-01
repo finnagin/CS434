@@ -18,9 +18,11 @@ function [feature, theta, info_gain, l_X, l_Y, r_X, r_Y, l_flag, r_flag] = stump
 info = [1:size(X,2);zeros(1,size(X,2));zeros(1,size(X,2))]';
 
 for n = 1:size(X,2)
-    gain = 1.5;
+    gain = -100;
     X_sorted = sortrows([X Y],n);
     Y_sorted = X_sorted(:,end);
+    X_sorted = X_sorted(:,1:(end-1));
+    split = [0 -100];
     
     for c = 2:size(X,1)
         Y_old = Y_sorted(c-1);
@@ -28,9 +30,11 @@ for n = 1:size(X,2)
         if Y_old ~= Y_new
             p1 = sum(Y(1:c-1) == 1)/(c-1);
             p2 = sum(Y(c:length(Y)) == 1)/(length(Y)-c+1);
-            gain_c = -(c-1)/length(Y)*(p1*log2(p1)+(1-p1)*log2(1-p1)) +...
+            p = sum(Y == 1)/length(Y);
+            gain_c = -p*log2(p) - (1-p)*log2(1-p) -...
+                        -(c-1)/length(Y)*(p1*log2(p1)+(1-p1)*log2(1-p1)) +...
                         -(1-(c-1)/length(Y))*(p2*log2(p2)+(1-p2)*log2(1-p2));
-            if gain_c < gain
+            if gain_c > gain
                 gain = gain_c;
                 split = [(X_sorted(c,n)+X_sorted(c-1,n))/2 gain_c];
             end
@@ -47,18 +51,18 @@ l_X = X(split_ind,:);
 r_X = X(~split_ind,:);
 l_Y = Y(split_ind);
 r_Y = Y(~split_ind);
-if sum(l_Y == 1) == length(l_Y)
+if sum(l_Y == 1) == length(l_Y) || sum(l_Y == 1) == 0
     l_flag = true;
 else
     l_flag = false;
 end
 
-if sum(r_Y == 1) == length(r_Y)
+if sum(r_Y == 1) == length(r_Y) || sum(r_Y == 1) == 0
     r_flag = true;
 else
     r_flag = false;
 end
 
-info_gain = info;
+info_gain = gain;
 
 end
