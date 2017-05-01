@@ -24,7 +24,6 @@ if ~(isequal(fix(layers),layers) && layers > .5)
 end
 
 tree = zeros(sum(2.^(0:(layers-1))), 12);
-side = zeros(1,sum(2.^(0:(layers-1))));
 skip = 0;
 data = cell(2,sum(2.^(0:(layers-1))));
 
@@ -82,12 +81,11 @@ for k = 1:sum(2.^(0:(layers-1)))
     
     if ~tree(k,4)
         c = c+1;
-        if c < sum(2.^(0:(layers-1))) - skip
-            tree(k,6) = c;
-            tree(c,8) = k;
-            side(c) = 1;
+        if c <= sum(2.^(0:(layers-1))) - skip
             data{1,c} = l_X;
             data{2,c} = l_Y;
+            tree(k,6) = c;
+            tree(c,8) = k;
         end
     else
         skip = skip + 1;
@@ -95,12 +93,11 @@ for k = 1:sum(2.^(0:(layers-1)))
     
     if ~tree(k,5)
         c = c+1;
-        if c < sum(2.^(0:(layers-1))) - skip
-            tree(k,7) = c;
-            tree(c,8) = k;
-            side(c) = 2;
+        if c <= sum(2.^(0:(layers-1))) - skip
             data{1,c} = r_X;
             data{2,c} = r_Y;
+            tree(k,6) = c;
+            tree(c,8) = k;
         end
     else
         skip = skip + 1;

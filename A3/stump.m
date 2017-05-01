@@ -31,9 +31,12 @@ for n = 1:size(X,2)
             p1 = sum(Y(1:c-1) == 1)/(c-1);
             p2 = sum(Y(c:length(Y)) == 1)/(length(Y)-c+1);
             p = sum(Y == 1)/length(Y);
-            gain_c = -p*log2(p) - (1-p)*log2(1-p) -...
-                        -(c-1)/length(Y)*(p1*log2(p1)+(1-p1)*log2(1-p1)) +...
-                        -(1-(c-1)/length(Y))*(p2*log2(p2)+(1-p2)*log2(1-p2));
+            gain_c = -p*mylog2(p) - (1-p)*mylog2(1-p) -...
+                        -(c-1)/length(Y)*(p1*mylog2(p1)+(1-p1)*mylog2(1-p1)) +...
+                        -(1-(c-1)/length(Y))*(p2*mylog2(p2)+(1-p2)*mylog2(1-p2));
+            if isnan(gain_c)
+                
+            end
             if gain_c > gain
                 gain = gain_c;
                 split = [(X_sorted(c,n)+X_sorted(c-1,n))/2 gain_c];

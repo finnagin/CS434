@@ -40,12 +40,12 @@ X_Test = Test(:,2:end);
 %% Normalize data
 
 for n = 1:size(X_Test,2)
-    X_Test(:,n) = X_Test(:,n) - min(X_Test(:,n)) + 10^-15;
+    X_Test(:,n) = X_Test(:,n) - min(X_Test(:,n));
     X_Test(:,n) = X_Test(:,n) ./ max(X_Test(:,n));
 end
 
 for n = 1:size(X_Train,2)
-    X_Train(:,n) = X_Train(:,n) - min(X_Train(:,n)) + 10^-15;
+    X_Train(:,n) = X_Train(:,n) - min(X_Train(:,n));
     X_Train(:,n) = X_Train(:,n) ./ max(X_Train(:,n));
 end
 
@@ -86,10 +86,10 @@ hold off
 
 %% 2.2
 
-l = [1 6];
-test_acc = zeros(1,2);
+l = 1:5;
+test_acc = zeros(1,length(l));
 
-for d = 1:2
+for d = 1:length(l)
     tree = treePlanter(X_Train, Y_Train, l(d));
     pred = treeRead(X_Train, tree);
     test_acc(d) = sum(Y_Train == pred)/length(Y_Train);
@@ -101,7 +101,7 @@ plot(l, test_acc)
 
 %%
 
-tree = treePlanter(X_Train, Y_Train, 3)
+tree = treePlanter(X_Train, Y_Train, 5)
 
 
 %%
