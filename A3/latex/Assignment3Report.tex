@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{amsmath,graphicx,amssymb,amsthm,url,listings}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{Implementation Assignment 3}
+\date{\today}
+\author{Rong Yu and Finn Womack}
+
+\begin{document}
+	\maketitle
+	\section*{Part 1: K-NN}
+	\subsection*{1.1: Normalizing data and implementing K-NN}
+After loading the testing and training data into feature matrices and vectors we normalized the data by calculating the minimum value, and the range $(max - min)$ of the training data for each feature and then normalized both the testing and training data using the training values
+	
+	Then we created a function that implements the K-NN algorithm with training data \( features and outputs\), testing features, and k as parameters
+	
+	\newpage
+	
+	\begin{figure}[h!]
+		\begin{center} 
+			\includegraphics[scale=0.4]{knn.eps} 
+		\end{center} 
+		\label{fig:M1}
+	\end{figure}
+	
+	The learning rate of $2 \cdot 10^{-6}$ gives the fastest convergence. When we picked larger learning rates we started to get oscillations. If we include a couple of these rates, $3 \cdot 10^{-6}$ \& $5 \cdot 10^{-6}$, the plot looks as follows:
+	
+	\newpage
+	
+	\begin{figure}[h!]
+		\begin{center} 
+			\includegraphics[scale=0.4]{depth.eps} 
+		\end{center} 
+		\label{fig:M2}
+	\end{figure}
+	
+	As we can see when the loss function approaches convergence at these rates we get oscillations. This makes sense because with a large learning rate the algorithm can overshoot the optimal solution
+	
+	\section*{Part 2: Testing and Training Accuracies}
+	
+	We then selected the learning rate of $2 \cdot 10^{-6}$ to test the effects of iterations on the testing and training accuracies:
+	\newpage
+	
+	\begin{figure}[h!]
+		\begin{center} 
+			\includegraphics[scale=0.4]{reduced.eps} 
+		\end{center}  
+		\label{fig:M3}
+	\end{figure}
+
+As we can see the training accuracy converges to 1 and the testing accuracy peaks at around 200 iterations and then remains constant. Something else that we thought was interesting was that if we used the learning rate of $1 \cdot 10^{-7}$ and plot the accuracies we get a better performance for the testing set at around 175 iterations and then it decreases to about the same performance as the $2 \cdot 10^{-6}$ rate:
+
+\newpage
+
+
+
+
+	\section*{Part 3: Deriving the Regularization Term}
+Consider the new objective function:
+	
+	$$
+	L(w) = \sum_{i = 1}^{n} l(w^{T} x_{i}, y_{i}) + \frac{\lambda}{2} \Vert W \Vert_{2}^{2}
+	$$
+	
+	This is the the same as the original objective function with an added term and since the gradient of a sum of functions in the sum of the gradients all we need to do is find the gradient of $\frac{\lambda}{2} \Vert W \Vert_{2}^{2}$:
+	
+	\begin{align}
+	\nabla \frac{\lambda}{2} \Vert W \Vert_{2}^{2} &= \frac{\lambda}{2} \nabla \Vert W \Vert_{2}^{2} \\
+	 &= \frac{\lambda}{2} \nabla \sum_{i = 1}^{m} w_{i}^{2} \\
+	 &= \frac{\lambda}{2} \begin{bmatrix}
+		 \frac{\partial}{\partial w_{1}} \sum_{i = 1}^{m} w_{i}^{2} \\ \\
+		 \frac{\partial}{\partial w_{2}} \sum_{i = 1}^{m} w_{i}^{2} \\
+		 \vdots \\
+		 \frac{\partial}{\partial w_{m}} \sum_{i = 1}^{m} w_{i}^{2} \\
+		 \end{bmatrix}\\
+	&= \frac{\lambda}{2} \begin{bmatrix}
+	2 w_{1} \\
+	2 w_{2} \\
+	\vdots \\
+	2 w_{m} \\
+	 \end{bmatrix}\\
+	&= \lambda W
+	\end{align}
+	
+Thus, the new batch gradient code would be as follows:\\
+\\
+Given: training examples $(x_{i}, y_{i}), i = 1, ..., N$ \\
+$W \leftarrow [0, 0, ..., 0]$ \\
+Repeat until convergence: \\
+\tab $ d \leftarrow [0, 0, ..., 0]$ \\
+\tab For i = 1 to N do \\
+\tab \tab $\hat{y}_{i} \leftarrow \frac{1}{1 + e^{-w \cdot x_{i}}}$ \\
+\tab \tab $error = y_{i} - \hat{y}_{i}$ \\
+\tab \tab $d = d + error \cdot x_{i}$ \\
+\tab $w \leftarrow w + \eta \cdot (d + \lambda w)$
+		
+
+
+	
+	\section*{Part 4: Implementing Regularization}
+	
+To examine the effect of regularization on the algorithm we plotted the testing and training accuracies against the following choices of $\lambda$:
+
+$$
+\{\lambda = (4x + .5) \cdot 10^{3} |x\in{\mathbb{N} \cap [0,16]} \}
+$$
+
+
+It appears that for both the testing and training accuracies it starts at the maximum accuracy and then decreases from there:
+\newpage
+
+
+We then decided to zoom in a bit around where the function starts to decrease be examining the following lambdas:
+	
+	\begin{align}
+		\lambda &= \begin{bmatrix}
+		3.5 \cdot 10^{3} \\
+		4 \cdot 10^{3} \\
+		4.5 \cdot 10^{3} \\
+		5 \cdot 10^{3} \\
+		5.5 \cdot 10^{3} \\
+		6 \cdot 10^{3} \\
+		6.5 \cdot 10^{3} \\
+		7 \cdot 10^{3} \\
+		7.5 \cdot 10^{3}
+		\end{bmatrix} 
+	\end{align}
+	
+On closer look we can see a local maximum around 4500:
+
+	
+Though when examining the value at the local maximum, 4500, we found that it is the same accuracy value achieved at lower lambdas.
+
+
+	
+	%\bibliography{myCitations} 
+	%\bibliographystyle{abbrv}
+	
+\end{document} 
