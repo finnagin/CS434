@@ -23,7 +23,7 @@ if ~(isequal(fix(layers),layers) && layers > .5)
     warning('Layers imput must be a positive integer. Setting to 1...')
 end
 
-tree = zeros(sum(2.^(0:(layers-1))), 12);
+tree = zeros(sum(2.^(0:(layers-1))), 10);
 skip = 0;
 data = cell(2,sum(2.^(0:(layers-1))));
 
@@ -32,7 +32,17 @@ data{2,1} = Y;
 
 c = 1;
 for k = 1:sum(2.^(0:(layers-1)))
-    if (k + skip) > sum(2.^(0:(layers-1)))
+    if (k + skip) > sum(2.^(0:(layers-1))) || c < k
+        for g = 1:length(tree(:,6))
+            if tree(g,6) > k-1
+                tree(g,6) = 0;
+            end
+        end
+        for g = 1:length(tree(:,7))
+            if tree(g,7) > k-1
+                tree(g,7) = 0;
+            end
+        end
         tree = tree(1:(k-1),:);
         return
     end
@@ -48,9 +58,6 @@ for k = 1:sum(2.^(0:(layers-1)))
 %    end
     
     [tree(k,1), tree(k,2), tree(k,3), l_X, l_Y, r_X, r_Y, tree(k,4), tree(k,5)] = stump(data{1,k}, data{2,k});
-    
-    tree(k,11) = length(l_Y);
-    tree(k,12) = length(r_Y);
     
     if tree(k,3) == -100
         tree(k, 9) = tree(tree(k,8),9);
@@ -96,7 +103,7 @@ for k = 1:sum(2.^(0:(layers-1)))
         if c <= sum(2.^(0:(layers-1))) - skip
             data{1,c} = r_X;
             data{2,c} = r_Y;
-            tree(k,6) = c;
+            tree(k,7) = c;
             tree(c,8) = k;
         end
     else
